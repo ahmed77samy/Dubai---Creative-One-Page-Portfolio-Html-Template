@@ -1,26 +1,13 @@
 <?php
 
-if(true){
-	$to = 'ahmed0salma.sa@gmail.com';
-	$subject = 'Callback';
-	$message = '
-			<html>
-				<head>
-					<title>Call me back</title>
-				</head>
-				<body>
-					<p><b>Name:</b> '.$_POST['name'].'</p>
-					<p><b>email:</b> '.$_POST['email'].'</p>                        
-					<p><b>message:</b> '.$_POST['message'].'</p>                        
-				</body>
-			</html>'; 
-	$headers  = "Content-type: text/html; charset=utf-8 \r\n"; 
-	$headers .= "From: Site <info@mail.com>\r\n"; 
-	mail($to, $subject, $message, $headers);
+//Taking all values
+$name 		= $_POST['name'];
+$email 		= $_POST['email'];
+$message 		= $_POST['message'];
+$output 	= "Name: ".$name."\n\nEmail: ".$email."\n\nMessage: ".$message;
 
-	echo json_encode(array('status' => 'success'));
-} else {
-	echo json_encode(array('status' => 'error'));
-}
+$to 		= 'ahmed0salma.sa@gmail.com';
+$headers	= 'FROM: "'.$email.'"';
 
+$send		= mail($to, $name, $output."\n\n***This message has been sent from Dubai", $headers);
 ?>

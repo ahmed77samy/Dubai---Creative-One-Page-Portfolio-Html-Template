@@ -186,41 +186,47 @@ var DUBAI = DUBAI || {};
         },
         
         ajaxContactForm: function () {
-	
-            "use strict";
             $('.form-response').hide();
-
-            $(".contact-form").on('submit', function(e){
-                
-                var name 		= $(".contact_form #name").val();
-                var email 		= $(".contact_form #email").val();
-                var message 	= $(".contact_form #message").val();
-            
-                //checking for blank fields	
-                if(name===''||email===''||message==='') {
-                    
-                    $('.form-response').fadeIn().html('<div class="alert alert-danger"><strong>Warning!</strong> Please fillup the informations correctly.</div>')
-                    setTimeout(function() { $('.form-response').fadeOut('slow') }, 4000);
-                }
-                else {
-                    var form_data = $(this).serialize();
+            $('.contact-area form').on('submit', function() {
+                var name = $('#contact-form-name').val();
+                var email = $('#contact-form-email').val();
+                var message = $('#contact-form-message').val();
+                name = $.trim(name);
+                email = $.trim(email);
+                message = $.trim(message);
+        
+                if (name != '' && email != '' && message != '') {
+                    var values = "name=" + name + "&email=" + email + " &message=" + message;
                     $.ajax({
                         type: "POST",
                         url: "./mail.php",
-                        dataType: "json", // Add datatype
-                        data: form_data
-                    }).done(function (data) {
-                        console.log(true);
-                        console.log(data);
-                    }).fail(function (data) {
-                        console.log(false);
-                        console.log(data);
+                        data: values,
+                        success: function() {
+                            $('#contact-form-name').val('');
+                            $('#contact-form-email').val('');
+                            $('#contact-form-message').val('');
+        
+                            $('.form-response').fadeIn().html('<div class="alert alert-success"><strong>Success!</strong> Email has been sent successfully.</div>');
+                            setTimeout(function() {
+                                $('.form-response').fadeOut('slow');
+                            }, 4000);
+                        },
+                        error: function(e) {
+                            $('.form-response').fadeIn().html('<div class="alert alert-danger"><strong>Warning! ' + e.statusText + '</div>')
+                            setTimeout(function() {
+                                $('.form-response').fadeOut('slow');
+                            }, 4000);
+                        }
                     });
-                    e.preventDefault();
+                } else {
+                    $('.form-response').fadeIn().html('<div class="alert alert-danger"><strong>Warning!</strong> Please fillup the informations correctly.</div>')
+                    setTimeout(function() {
+                        $('.form-response').fadeOut('slow');
+                    }, 4000);
                 }
-                return false; 
+                return false;
             });
-        }
+        }        
 
     }
 
