@@ -295,4 +295,4 @@ var DUBAI = DUBAI || {};
     
     $( document ).ready( DUBAI.documentOnReady.init );
 
-})(jQuery);        
+})(jQuery);
