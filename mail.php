@@ -1,6 +1,6 @@
 <?php
 
-if((isset($_POST['name']))&&(isset($_POST['email'])&&$_POST['message']!="")){
+if(true){
 	$to = 'ahmed0salma.sa@gmail.com';
 	$subject = 'Callback';
 	$message = '
@@ -9,8 +9,9 @@ if((isset($_POST['name']))&&(isset($_POST['email'])&&$_POST['message']!="")){
 					<title>Call me back</title>
 				</head>
 				<body>
-					<p><b>Name:</b> '.$_POST['call-name'].'</p>
-					<p><b>Phonenum:</b> '.$_POST['phone'].'</p>                        
+					<p><b>Name:</b> '.$_POST['name'].'</p>
+					<p><b>email:</b> '.$_POST['email'].'</p>                        
+					<p><b>message:</b> '.$_POST['message'].'</p>                        
 				</body>
 			</html>'; 
 	$headers  = "Content-type: text/html; charset=utf-8 \r\n"; 

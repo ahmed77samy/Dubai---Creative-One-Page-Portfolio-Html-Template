@@ -190,13 +190,11 @@ var DUBAI = DUBAI || {};
             "use strict";
             $('.form-response').hide();
 
-            jQuery(".contact-form").on('submit', function(e){
-
-                e.preventDefault();
+            $(".contact-form").on('submit', function(e){
                 
-                var name 		= jQuery(".contact_form #name").val();
-                var email 		= jQuery(".contact_form #email").val();
-                var message 	= jQuery(".contact_form #message").val();
+                var name 		= $(".contact_form #name").val();
+                var email 		= $(".contact_form #email").val();
+                var message 	= $(".contact_form #message").val();
             
                 //checking for blank fields	
                 if(name===''||email===''||message==='') {
@@ -204,18 +202,21 @@ var DUBAI = DUBAI || {};
                     $('.form-response').fadeIn().html('<div class="alert alert-danger"><strong>Warning!</strong> Please fillup the informations correctly.</div>')
                     setTimeout(function() { $('.form-response').fadeOut('slow') }, 4000);
                 }
-                else{
+                else {
                     var form_data = $(this).serialize();
                     $.ajax({
-                        type: "POST", 
+                        type: "POST",
                         url: "./mail.php",
                         dataType: "json", // Add datatype
                         data: form_data
                     }).done(function (data) {
+                        console.log(true);
                         console.log(data);
                     }).fail(function (data) {
+                        console.log(false);
                         console.log(data);
                     });
+                    e.preventDefault();
                 }
                 return false; 
             });
