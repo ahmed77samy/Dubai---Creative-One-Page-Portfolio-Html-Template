@@ -191,6 +191,8 @@ var DUBAI = DUBAI || {};
             $('.form-response').hide();
 
             jQuery(".contact-form").on('submit', function(e){
+
+                e.preventDefault();
                 
                 var name 		= jQuery(".contact_form #name").val();
                 var email 		= jQuery(".contact_form #email").val();
