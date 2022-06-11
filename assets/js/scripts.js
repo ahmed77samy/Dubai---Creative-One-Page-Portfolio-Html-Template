@@ -150,8 +150,10 @@ var DUBAI = DUBAI || {};
         },
 
         typed: function () {
+            var dataTyped = JSON.parse('[' + $(".typed-text").data("typed") + ']');
+            
             var typed = new Typed('.typed-text', {
-                strings: ["developer.", "Freelancer.", "Designer."],
+                strings: dataTyped,
                 typeSpeed: 60,
                 backSpeed: 60,
                 loop: true,
